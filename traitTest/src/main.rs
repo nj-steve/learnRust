@@ -82,11 +82,13 @@ trait PerPage{
         println!("Per Page Default: 10");
     }
 }
+//trait Paginate: Page + PerPage 冒号表示继承，Paginate同时继承了Page 和 PerPage两个trait
 trait Paginate: Page + PerPage{
     fn set_skip_page(&self, num: i32){
         println!("Skip Page : {:?}", num);
     }
 }
+//为泛型T实现了Paginate。为所有拥有Page和PerPage行为的类型实现Paginate。
 impl <T: Page + PerPage>Paginate for T{}
 
 struct MyPaginate{ page: i32 }
