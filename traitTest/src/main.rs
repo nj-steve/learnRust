@@ -89,7 +89,7 @@ trait Paginate: Page + PerPage{
     }
 }
 //为泛型T实现了Paginate。为所有拥有Page和PerPage行为的类型实现Paginate。
-impl <T: Page + PerPage>Paginate for T{}
+impl <T: Page + PerPage> Paginate for T{}
 
 struct MyPaginate{ page: i32 }
 impl Page for MyPaginate{}
