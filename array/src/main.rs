@@ -48,5 +48,9 @@ fn main() {
     assert_eq!(iter.next(), Some(&4));
     assert_eq!(iter.next(), None);
 
+    let a = 3;
+    let b = 1;
+    debug_assert_eq!(a, b);
+
     println!("Hello, world!");
 }
