@@ -40,5 +40,13 @@ fn main() {
     for n in 0..multiparents2.len(){
         println!("multiparents2 = {}",multiparents2[n]);
     }
+
+    let a = [0, 1, 2, 3, 4, 5];
+    let mut iter = a.iter().step_by(2);
+    assert_eq!(iter.next(), Some(&0));
+    assert_eq!(iter.next(), Some(&2));
+    assert_eq!(iter.next(), Some(&4));
+    assert_eq!(iter.next(), None);
+
     println!("Hello, world!");
 }
