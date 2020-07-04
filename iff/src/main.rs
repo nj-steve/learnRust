@@ -44,3 +44,46 @@ info!("generate_post:finish");
 //Ok(proofs)
 Ok(retproof)
 */
+
+
+pub_sectors_chunk
+.iter()
+.zip(priv_sectors_chunk.iter())
+.enumerate()
+.par_iter()
+.map(|(i,(pub_sector, priv_sector))|
+{
+let tree = priv_sector.tree;
+let sector_id = pub_sector.id;
+let tree_leafs = tree.leafs();
+
+trace!(
+"Generating proof for tree leafs {} and arity {}",
+tree_leafs,
+Tree::Arity::to_usize(),
+);
+
+let inclusion_proofs = (0..pub_params.challenge_count)
+.into_par_iter()
+.map(|n| {
+let challenge_index = ((j * num_sectors_per_chunk + i)
+* pub_params.challenge_count
++ n) as u64;
+let challenged_leaf_start = generate_leaf_challenge(
+pub_params,
+pub_inputs.randomness,
+sector_id.into(),
+challenge_index,
+)?;
+
+tree.gen_cached_proof(challenged_leaf_start as usize, None)
+})
+.collect::<Result<Vec<_>>>()?;
+
+proofs.push(SectorProof {
+inclusion_proofs,
+comm_c: priv_sector.comm_c,
+comm_r_last: priv_sector.comm_r_last,
+});
+Ok("")
+});
