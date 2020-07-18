@@ -45,7 +45,7 @@ info!("generate_post:finish");
 Ok(retproof)
 */
 
-
+/*
 pub_sectors_chunk
 .iter()
 .zip(priv_sectors_chunk.iter())
@@ -87,3 +87,4 @@ comm_r_last: priv_sector.comm_r_last,
 });
 Ok("")
 });
+*/
