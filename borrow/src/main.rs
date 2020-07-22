@@ -1,3 +1,5 @@
+use std::thread as stdthread;
+use std::time::Duration;
 /*fn main(){
 
     let v = vec![10,20,30]; // 声明一个向量，变量 v 具有数据的所有权
@@ -42,4 +44,21 @@ fn main(){
     let v = vec![10,20,30];     // 声明一个向量，变量 v 具有数据的所有权
     print_vector(&v);           // 第二步，传递变量的引用给函数
     println!("{}",v[0]);        // 这行会报错
+    let mut device_id:usize = 10000;
+    loop {
+        stdthread::sleep(Duration::from_millis(10));
+        for k in 0..10003 {
+            device_id = k;
+            println!("device_id == {}",device_id);
+            if device_id == 10001{
+                println!("10001 device_id == {}",device_id);
+                break
+            }
+        }
+        if device_id != 10000 {
+            println!("bbbbbb device_id == {}",device_id);
+            break
+        }
+    }
+    println!("lllllll device_id == {}",device_id);
 }
