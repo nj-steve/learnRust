@@ -48,9 +48,23 @@ fn main() {
     assert_eq!(iter.next(), Some(&4));
     assert_eq!(iter.next(), None);
 
-    let a = 3;
-    let b = 1;
-    debug_assert_eq!(a, b);
-
     println!("Hello, world!");
+    ownership();
+    borrow();
+}
+
+fn ownership(){
+    let a = [1,2,3];
+    let b = &a;
+    println!("a addr {:p}",&a);//打印地址
+    println!("b addr {:p}",b);//打印地址
+    println!("b array {:?}",b);//打印内容
+}
+
+//通过&mut 获取c的可变引用
+fn borrow(){
+    let mut c = vec![1,2,3];//要获取可变引用，必须先声明可变绑定
+    let d = &mut c;
+    d.push(4);
+    println!("d array {:?}",d);
 }

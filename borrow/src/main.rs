@@ -61,4 +61,27 @@ fn main(){
         }
     }
     println!("lllllll device_id == {}",device_id);
+
+    //把引用作为函数参数的行为叫借用
+    let s = String::from("hello world");
+    let len = cal_len(&s);
+    println!("lllll len {} s:{}",len,s);
+    //引用不发生所有权转移，所以s依然可以使用
+
+    //可变引用
+    let mut ms = String::from("hhh");
+    let lenth = cal_lenth(&mut ms);
+    println!("mmmmmm len {} s:{}",lenth,ms);
+}
+
+//&String类型是String类型的引用
+//引用是允许你使用某些值，但不能获得其所有权
+fn cal_len(s:&String) -> usize{
+    //s.push_str("!!!!"); //不可以改变借用的内容
+    s.len()
+}
+
+fn cal_lenth(s:&mut String) -> usize{
+    s.push_str("!!!!");
+    s.len()
 }
